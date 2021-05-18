@@ -158,7 +158,7 @@ function load_custom_templates( $template ) {
     return $template;
 }
 
-function solution_archive_template( $archive_template ) {
+function custom_archive_templates( $archive_template ) {
      global $post;
      if ( is_post_type_archive ( 'solutions' ) ) {
           $archive_template = dirname( __FILE__ ) . '/archive-solutions.php';
@@ -169,14 +169,14 @@ function solution_archive_template( $archive_template ) {
      return $archive_template;
 }
 
-// function course_tax_template( $tax_template ) {
-//     global $post;
-//     if ( is_tax ( 'course_category' ) ) {
-//          $tax_template = dirname( __FILE__ ) . '/taxonomy.php';
-//     }
-//     return $tax_template;
-// }
+function custom_tax_templates( $tax_template ) {
+    global $post;
+    if ( is_tax ( 'usecase_categories' ) ) {
+         $tax_template = dirname( __FILE__ ) . '/taxonomy-usecases.php';
+    }
+    return $tax_template;
+}
 
 add_filter( 'single_template', 'load_custom_templates' );
-add_filter( 'archive_template', 'course_archive_template');
-// add_filter( 'taxonomy_template', 'course_tax_template');
+add_filter( 'archive_template', 'custom_archive_templates');
+add_filter( 'taxonomy_template', 'custom_tax_templates');

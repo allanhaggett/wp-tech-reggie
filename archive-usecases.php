@@ -23,30 +23,14 @@ $description = get_the_archive_description();
 			<div class="archive-description"><?php echo wp_kses_post( wpautop( $description ) ); ?></div>
 		<?php endif; ?>
 	</header><!-- .page-header -->
-
+	
+	<div class="entry-content">
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-	<?php get_template_part( 'template-parts/header/excerpt-header', get_post_format() ); ?>
-
-	<div class="entry-content">
-		<?php get_template_part( 'template-parts/excerpt/excerpt', get_post_format() ); ?>
-
-
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer default-max-width">
-		<?php twenty_twenty_one_entry_meta_footer(); ?>
-	</footer><!-- .entry-footer -->
-</article><!-- #post-${ID} -->
-
-		
-
-	
+		<div><a href="<?= the_permalink() ?>"><?= the_title() ?></a></div>
 	<?php endwhile; ?>
+	</div>
 
-	<?php twenty_twenty_one_the_posts_navigation(); ?>
 
 <?php else : ?>
 	<?php get_template_part( 'template-parts/content/content-none' ); ?>

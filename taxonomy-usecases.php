@@ -23,17 +23,16 @@ $description = get_the_archive_description();
 			<div class="archive-description"><?php echo wp_kses_post( wpautop( $description ) ); ?></div>
 		<?php endif; ?>
 	</header><!-- .page-header -->
-
+	<div class="entry-content">
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>
-		<article>
-		<h3><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
-		<?php the_content() ?>
 
-		</article>
+		<div><a href="<?php the_permalink() ?>"><?php the_title() ?></a></div>
+
+
 	<?php endwhile; ?>
 
-	<?php twenty_twenty_one_the_posts_navigation(); ?>
+
 
 <?php else : ?>
 	<?php get_template_part( 'template-parts/content/content-none' ); ?>
