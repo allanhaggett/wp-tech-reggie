@@ -50,7 +50,18 @@ $args=array(
 $solutions = get_posts( $args );
 foreach($solutions as $s): ?>
 <div style="background: #f2f2f2; margin: .25em; padding: .5em;">
+<?php 
+$term_obj_list = get_the_terms( $s->ID, 'solstatuses' );
+//print_r($term_obj_list);
+$terms_string = join(', ', wp_list_pluck($term_obj_list, 'name'));
+?>
+<?php if($terms_string == 'Under Review' || $terms_string == 'Not Approved'): ?>
+<span style="background: #999; border-radius: 5px; color: #fff; display: inline-block; font-size: 14px; padding: 0 5px;">
+	<?= $terms_string ?>
+</span>
+<?php endif ?>
 <a href="/tech-inventory/solutions/<?= $s->post_name ?>"><?= $s->post_title ?></a>
+
 </div>
 <?php
 endforeach;

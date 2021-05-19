@@ -90,9 +90,16 @@ add_action( 'init', 'psalc_custom_post_usecases' );
 
 
 /**
- * Start applying various taxonomies; start with the methods, 
- * then init them all in one place
+ *
  */
+
+ 
+/** 
+ * Now let's initiate those awesome taxonomies!
+ */
+
+add_action( 'init', 'psalc_taxonomies_usecase_categories', 0 );
+add_action( 'init', 'psalc_taxonomies_statuses', 0 );
 
 /**
  * Use Case Categories
@@ -119,12 +126,32 @@ function psalc_taxonomies_usecase_categories() {
     register_taxonomy( 'usecase_categories', 'usecases', $args );
 }
 
-
-/** 
- * Now let's initiate all of those awesome taxonomies!
+/**
+ * Use solution statuses
  */
+function psalc_taxonomies_statuses () {
+    $labels = array(
+        'name'              => _x( 'Statuses', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Status', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Statuses' ),
+        'all_items'         => __( 'All Statuses' ),
+        'parent_item'       => __( 'Parent Use Status' ),
+        'parent_item_colon' => __( 'Parent Use Status:' ),
+        'edit_item'         => __( 'Edit Status' ), 
+        'update_item'       => __( 'Update Status' ),
+        'add_new_item'      => __( 'Add New Status' ),
+        'new_item_name'     => __( 'New Status' ),
+        'menu_name'         => __( 'Statuses' ),
+    );
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+        'show_in_rest' => true,
+    );
+    register_taxonomy( 'solstatuses', 'solutions', $args );
+}
 
-add_action( 'init', 'psalc_taxonomies_usecase_categories', 0 );
+
 
 
 /**
@@ -180,3 +207,4 @@ function custom_tax_templates( $tax_template ) {
 add_filter( 'single_template', 'load_custom_templates' );
 add_filter( 'archive_template', 'custom_archive_templates');
 add_filter( 'taxonomy_template', 'custom_tax_templates');
+
